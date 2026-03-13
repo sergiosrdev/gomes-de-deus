@@ -10,14 +10,21 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="assets/favicon.png">
-  <link rel="preload" href="assets/logo.jpg" as="image">
+  <link rel="preload" href="assets/logogd.jpeg" as="image">
   <link rel="stylesheet" href="css/styles.css">
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      const theme = savedTheme === 'light' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LegalService",
     "name": "Adriano Gomes de Deus Advocacia",
-    "image": "assets/logo.jpg",
+    "image": "assets/logogd.jpeg",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Belém",
@@ -39,7 +46,7 @@
 <header class="header" role="banner">
   <div class="container nav">
     <a class="brand" href="#topo" aria-label="Página inicial">
-      <img src="assets/logo.jpg" alt="Logomarca AGD Advocacia">
+      <img src="assets/logogd.jpeg" alt="Logomarca AGD Advocacia">
       <div class="name">ADRIANO GOMES DE DEUS <div class="sub">ADVOCACIA</div></div>
     </a>
     <nav class="menu" aria-label="Menu principal">
@@ -48,10 +55,16 @@
       <a href="#contato">Contato</a>
       <a class="cta whatsapp-link" href="https://wa.me/5591981122227?text=Ol%C3%A1%20gostaria%20de%20um%20atendimento" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WhatsApp</a>
     </nav>
-    <button id="burger" class="burger" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Menu
-    </button>
+    <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Alternar tema" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+        <span class="theme-toggle-label">Modo noturno</span>
+      </button>
+      <button id="burger" class="burger" type="button" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Menu
+      </button>
+    </div>
   </div>
 </header>
 <nav id="mobileMenu" class="mobile-menu" aria-label="Menu móvel">
@@ -80,7 +93,7 @@
       </div>
     </div>
     <div class="card" style="padding:18px">
-      <img src="assets/logo.jpg" alt="Símbolo do escritório" style="width:100%; border-radius:12px">
+      <img src="assets/fotoperfil.jpeg" alt="Adriano Gomes de Deus" style="width:100%; border-radius:12px; object-fit:cover; aspect-ratio:4/5">
       <p class="notice" style="margin-top:10px">Atendimento presencial em Belém/PA e online.</p>
       <div class="kpis">
         <div class="kpi"><b>24h</b><span>Canal de contato</span></div>
@@ -118,7 +131,7 @@
         <li>Relatórios de andamento e prazos bem definidos.</li>
       </ul>
     </div>
-    <img src="assets/logo.jpg" alt="Marca do escritório em dourado">
+    <img src="assets/logogd.jpeg" alt="Marca do escritório em dourado">
   </div>
 </section>
 
@@ -156,6 +169,25 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(theme){
+    const isLight = theme === 'light';
+    root.setAttribute('data-theme', isLight ? 'light' : 'dark');
+    themeToggle?.setAttribute('aria-pressed', String(isLight));
+    const icon = themeToggle?.querySelector('.theme-toggle-icon');
+    const label = themeToggle?.querySelector('.theme-toggle-label');
+    if (icon) icon.textContent = isLight ? '☀' : '☾';
+    if (label) label.textContent = isLight ? 'Modo diurno' : 'Modo noturno';
+    if (themeMeta) themeMeta.setAttribute('content', isLight ? '#f5efe1' : '#0B0E11');
+  }
+  applyTheme(root.getAttribute('data-theme') || 'dark');
+  themeToggle?.addEventListener('click', () => {
+    const nextTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', nextTheme);
+    applyTheme(nextTheme);
+  });
   function msgLink(){
     const nome = encodeURIComponent(document.getElementById('nome').value.trim());
     const assunto = encodeURIComponent(document.getElementById('assunto').value.trim());

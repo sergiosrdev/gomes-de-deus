@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-03-13",
+  "project_root": "C:\\Users\\PC\\OneDrive\\Área de Trabalho\\gomes-de-deus",
+  "deploy_base_url": "https://sergiosrdev.github.io/gomes-de-deus/",
+  "images": [
+    {
+      "name": "fotoperfil",
+      "file_name": "fotoperfil.jpeg",
+      "local_path": "C:\\Users\\PC\\OneDrive\\Área de Trabalho\\gomes-de-deus\\assets\\fotoperfil.jpeg",
+      "site_relative_url": "assets/fotoperfil.jpeg",
+      "expected_public_url": "https://sergiosrdev.github.io/gomes-de-deus/assets/fotoperfil.jpeg"
+    },
+    {
+      "name": "logogd",
+      "file_name": "logogd.jpeg",
+      "local_path": "C:\\Users\\PC\\OneDrive\\Área de Trabalho\\gomes-de-deus\\assets\\logogd.jpeg",
+      "site_relative_url": "assets/logogd.jpeg",
+      "expected_public_url": "https://sergiosrdev.github.io/gomes-de-deus/assets/logogd.jpeg"
+    }
+  ]
+}
